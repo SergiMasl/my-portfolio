@@ -9,10 +9,11 @@ import {
 } from 'react-icons/fa'
 import { HiOutlineMail } from 'react-icons/hi'
 import { BsFillPersonFill } from 'react-icons/bs'
+import { Link } from 'react-scroll'
 
 const Navbar = () => {
     const [isNavVisible, setNav] = useState(false)
-    const handelClick = () => setNav(!isNavVisible)
+    const handleClick = () => setNav(!isNavVisible)
 
     const navNames = ['Home', 'About', 'Skills', 'Work', 'Contact']
     const socialBtm = [
@@ -46,11 +47,15 @@ const Navbar = () => {
             <div className="hidden md:flex">
                 <ul className="hidden md:flex">
                     {navNames.map((navName) => (
-                        <li key={navName}>{navName}</li>
+                        <li key={navName}>
+                            <Link to={navName} smooth={true} duration={500}>
+                                {navName}
+                            </Link>
+                        </li>
                     ))}
                 </ul>
             </div>
-            <div onClick={handelClick} className="md:hidden z-10">
+            <div onClick={handleClick} className="md:hidden z-10">
                 {!isNavVisible ? <FaBars /> : <FaTimes />}
             </div>
             {/* mobile menu */}
@@ -63,8 +68,15 @@ const Navbar = () => {
                     }
                 >
                     {navNames.map((navName) => (
-                        <li className="PY-6 text-4xl" key={navName}>
-                            {navName}
+                        <li className="py-6 text-4xl">
+                            <Link
+                                onClick={handleClick}
+                                to={navName}
+                                smooth={true}
+                                duration={500}
+                            >
+                                {navName}
+                            </Link>
                         </li>
                     ))}
                 </ul>
